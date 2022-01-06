@@ -17,7 +17,8 @@ class ConvNormLReLU(nn.Sequential):
         super(ConvNormLReLU, self).__init__(
             pad_layer[pad_mode](padding),
             nn.Conv2d(in_ch, out_ch, kernel_size=kernel_size, stride=stride, padding=0, groups=groups, bias=bias),
-            nn.GroupNorm(num_groups=1, num_channels=out_ch, affine=True),
+            #nn.GroupNorm(num_groups=1, num_channels=out_ch, affine=True),
+            nn.BatchNorm2d(out_ch, affine=True),
             nn.LeakyReLU(0.2, inplace=True)
         )
 
