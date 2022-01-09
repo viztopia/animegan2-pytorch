@@ -37,7 +37,8 @@ class InvertedResBlock(nn.Module):
         layers.append(ConvNormLReLU(bottleneck, bottleneck, groups=bottleneck, bias=True))
         # pw
         layers.append(nn.Conv2d(bottleneck, out_ch, kernel_size=1, padding=0, bias=False))
-        layers.append(nn.GroupNorm(num_groups=1, num_channels=out_ch, affine=True))
+        # layers.append(nn.GroupNorm(num_groups=1, num_channels=out_ch, affine=True))
+        layers.append(nn.InstanceNorm2d(num_features=out_ch, affine=True))
 
         self.layers = nn.Sequential(*layers)
         
